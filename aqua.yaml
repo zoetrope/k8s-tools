@@ -19,3 +19,4 @@ packages:
 - name: zegl/kube-score@v1.14.0
 - name: stackrox/kube-linter@0.3.0
 - name: mikefarah/yq@v4.25.2
+- name: grafana/tanka@v0.22.0
