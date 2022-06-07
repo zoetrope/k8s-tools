@@ -9,6 +9,7 @@ help: ## Display this help.
 
 .PHONY: preview
 preview:
+	cd manifests; jb install
 	./bin/jsonnet -J ./manifests/vendor ./manifests/main.jsonnet | yq -P -
 
 setup: ## Setup tools
@@ -16,3 +17,11 @@ setup: ## Setup tools
 	GOBIN=$(BIN_DIR) go install github.com/google/go-jsonnet/cmd/jsonnet
 	GOBIN=$(BIN_DIR) go install github.com/google/go-jsonnet/cmd/jsonnetfmt
 	GOBIN=$(BIN_DIR) go install github.com/google/go-jsonnet/cmd/jsonnet-lint
+
+.PHONY: build-openapi2jsonschema
+build-openapi2jsonschema: ## Build container image for openapi2jsonschema
+	docker build -t openapi2jsonschema -f Dockerfile.openapi2jsonschema .
+
+.PHONY: openapi2jsonschema
+openapi2jsonschema: ## Convert OpenAPI to JSON Schema
+	docker run --rm -v $(pwd):/work openapi2jsonschema sample.yaml
