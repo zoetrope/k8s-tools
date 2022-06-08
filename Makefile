@@ -17,7 +17,7 @@ stop: ## Stop the local Kubernetes cluster
 
 .PHONY: preview
 preview:
-	# @cd manifests; jb install
+	@cd manifests; jb install
 	@./bin/jsonnet -J ./manifests/vendor ./manifests/main.jsonnet | yq -P -
 
 setup: ## Setup tools
