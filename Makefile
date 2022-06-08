@@ -7,10 +7,18 @@ all: setup
 help: ## Display this help.
 	@awk 'BEGIN {FS = ":.*##"; printf "\nUsage:\n  make \033[36m<target>\033[0m\n"} /^[a-zA-Z_0-9-]+:.*?##/ { printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2 } /^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5) } ' $(MAKEFILE_LIST)
 
+.PHONY: start
+start: ## Start a local Kubernetes cluster
+	ctlptl apply -f ./cluster.yaml
+
+.PHONY: stop
+stop: ## Stop the local Kubernetes cluster
+	ctlptl delete -f ./cluster.yaml
+
 .PHONY: preview
 preview:
-	cd manifests; jb install
-	./bin/jsonnet -J ./manifests/vendor ./manifests/main.jsonnet | yq -P -
+	# @cd manifests; jb install
+	@./bin/jsonnet -J ./manifests/vendor ./manifests/main.jsonnet | yq -P -
 
 setup: ## Setup tools
 	mkdir -p $(BIN_DIR)
