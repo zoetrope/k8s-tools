@@ -16,6 +16,10 @@ start: ## Start a local Kubernetes cluster
 stop: ## Stop the local Kubernetes cluster
 	ctlptl delete -f ./cluster.yaml
 
+.PHONY: lint
+lint: ## Lint go programs
+	golangci-lint run
+
 .PHONY: format
 format: ## Format jsonnet and libsonnet files
 	set -e; for i in $$(find ./manifests/ -name '*.jsonnet' -not -path './manifests/vendor/*'); do \
