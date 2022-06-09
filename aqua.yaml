@@ -4,6 +4,9 @@
 registries:
 - type: standard
   ref: v2.19.0 # renovate: depName=aquaproj/aqua-registry
+- type: local
+  name: local
+  path: registry.yaml
 packages:
 - name: kubernetes-sigs/kind@v0.14.0
 - name: tilt-dev/ctlptl@v0.8.3
@@ -20,3 +23,5 @@ packages:
 - name: stackrox/kube-linter@0.3.0
 - name: mikefarah/yq@v4.25.2
 - name: grafana/tanka@v0.22.0
+- name: google/go-jsonnet@v0.18.0
+  registry: local

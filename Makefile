@@ -18,13 +18,10 @@ stop: ## Stop the local Kubernetes cluster
 .PHONY: preview
 preview:
 	@cd manifests; jb install
-	@./bin/jsonnet -J ./manifests/vendor ./manifests/main.jsonnet | yq -P -
+	@jsonnet -J ./manifests/vendor ./manifests/main.jsonnet | yq -P -
 
 setup: ## Setup tools
-	mkdir -p $(BIN_DIR)
-	GOBIN=$(BIN_DIR) go install github.com/google/go-jsonnet/cmd/jsonnet
-	GOBIN=$(BIN_DIR) go install github.com/google/go-jsonnet/cmd/jsonnetfmt
-	GOBIN=$(BIN_DIR) go install github.com/google/go-jsonnet/cmd/jsonnet-lint
+	go install github.com/go-delve/delve/cmd/dlv
 
 .PHONY: build-openapi2jsonschema
 build-openapi2jsonschema: ## Build container image for openapi2jsonschema
