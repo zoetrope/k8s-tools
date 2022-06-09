@@ -1,11 +1,11 @@
 apiVersion: ctlptl.dev/v1alpha1
 kind: Registry
-name: ctlptl-registry
-port: 5005
+name: k8s-tools-registry
+port: 5555
 ---
 apiVersion: ctlptl.dev/v1alpha1
 kind: Cluster
-name: kind-cattage-dev
+name: kind-k8s-tools
 product: kind
 kubernetesVersion: v1.23.6
-registry: ctlptl-registry
+registry: k8s-tools-registry
