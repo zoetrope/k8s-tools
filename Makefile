@@ -1,4 +1,4 @@
-BIN_DIR := $(shell pwd)/bin
+SHELL=/bin/bash
 
 .PHONY: all
 all: setup
@@ -14,6 +14,17 @@ start: ## Start a local Kubernetes cluster
 .PHONY: stop
 stop: ## Stop the local Kubernetes cluster
 	ctlptl delete -f ./cluster.yaml
+
+.PHONY: format
+format: ## Format jsonnet and libsonnet files
+	set -e; for i in $$(find ./manifests/ -name '*.jsonnet' -not -path './manifests/vendor/*'); do \
+		echo $$i; \
+		jsonnetfmt -i $$i; \
+	done
+	set -e; for i in $$(find ./manifests/ -name '*.libsonnet' -not -path './manifests/vendor/*'); do \
+		echo $$i; \
+		jsonnetfmt -i $$i; \
+	done
 
 .PHONY: preview
 preview:
