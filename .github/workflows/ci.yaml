@@ -1,0 +1,31 @@
+name: main
+on:
+  pull_request:
+  push:
+    branches:
+      - 'main'
+    tags-ignore:
+      - '*'
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: aquaproj/aqua-installer@v1.0.0
+        with:
+          aqua_version: v1.10.0
+      - name: Lint
+        run: make lint
+      - name: Conform
+        run: make conform
+  tilt:
+    name: Run tilt ci
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: aquaproj/aqua-installer@v1.0.0
+        with:
+          aqua_version: v1.10.0
+      - run: make start
+      - run: tilt ci
