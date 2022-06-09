@@ -1,4 +1,5 @@
 SHELL=/bin/bash
+make = make --no-print-directory
 
 .PHONY: all
 all: setup
@@ -26,8 +27,16 @@ format: ## Format jsonnet and libsonnet files
 		jsonnetfmt -i $$i; \
 	done
 
+.PHONY: conform
+conform: ## Conform manifests
+	$(make) preview | kubeconform
+
+.PHONY: score
+score: ## Score manifests
+	$(make) preview | kube-score score -
+
 .PHONY: preview
-preview:
+preview: ## Preview manifests
 	@cd manifests; jb install
 	@jsonnet -J ./manifests/vendor ./manifests/main.jsonnet | yq -P -
 
