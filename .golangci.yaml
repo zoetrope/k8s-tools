@@ -1,0 +1,14 @@
+run:
+  go: '1.18'
+  timeout: 5m
+linters:
+  enable:
+    - dupl
+    - gocognit
+    - goconst
+    - gocyclo
+    - godot
+    - gofmt
+    - revive
+  disable:
+    - structcheck

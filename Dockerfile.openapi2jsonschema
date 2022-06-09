@@ -1,0 +1,9 @@
+FROM python:3
+
+RUN echo pyyaml > requirements.txt
+RUN curl -LO https://raw.githubusercontent.com/yannh/kubeconform/master/scripts/openapi2jsonschema.py \
+	&& chmod +x openapi2jsonschema.py
+RUN pip install -r requirements.txt
+
+WORKDIR /work
+ENTRYPOINT ["/openapi2jsonschema.py"]
