@@ -14,10 +14,6 @@ start: ## Start a local Kubernetes cluster
 stop: ## Stop the local Kubernetes cluster
 	ctlptl delete -f ./cluster.yaml
 
-.PHONY: lint
-lint: ## Lint go programs
-	golangci-lint run
-
 ## Jsonnet
 
 .PHONY: format
@@ -31,18 +27,16 @@ format: ## Format jsonnet and libsonnet files
 		jsonnetfmt -i $$i; \
 	done
 
-.PHONY: conform
-conform: ## Conform manifests
-	$(make) preview | kubeconform
-
-.PHONY: score
-score: ## Score manifests
-	$(make) preview | kube-score score -
-
 .PHONY: preview
 preview: ## Preview manifests
 	@cd manifests; jb install
 	@jsonnet -J ./manifests/vendor ./manifests/main.jsonnet | yq -P -
+
+.PHONY: lint
+lint: ## Lint go and manifests
+	$(make) preview | kubeconform
+	$(make) preview | kube-linter lint -
+	golangci-lint run
 
 ## Setup
 

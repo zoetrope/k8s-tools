@@ -28,7 +28,7 @@ if debug_mode:
 local_resource('build-hello', build_cmd, deps=['./main.go'])
 
 docker_build_with_restart(
-  'hello',  # コンテナイメージ名
+  'hello:dev',  # コンテナイメージ名
   '.',      # docker build する際のパス
   entrypoint=entrypoint,
   dockerfile_contents=DOCKERFILE,
