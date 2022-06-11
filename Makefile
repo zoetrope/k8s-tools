@@ -4,9 +4,7 @@ make = make --no-print-directory
 .PHONY: all
 all: setup
 
-.PHONY: help
-help: ## Display this help.
-	@awk 'BEGIN {FS = ":.*##"; printf "\nUsage:\n  make \033[36m<target>\033[0m\n"} /^[a-zA-Z_0-9-]+:.*?##/ { printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2 } /^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5) } ' $(MAKEFILE_LIST)
+## Development
 
 .PHONY: start
 start: ## Start a local Kubernetes cluster
@@ -19,6 +17,8 @@ stop: ## Stop the local Kubernetes cluster
 .PHONY: lint
 lint: ## Lint go programs
 	golangci-lint run
+
+## Jsonnet
 
 .PHONY: format
 format: ## Format jsonnet and libsonnet files
@@ -44,8 +44,16 @@ preview: ## Preview manifests
 	@cd manifests; jb install
 	@jsonnet -J ./manifests/vendor ./manifests/main.jsonnet | yq -P -
 
+## Setup
+
 setup: ## Setup tools
 	go install github.com/go-delve/delve/cmd/dlv
+
+.PHONY: help
+help: ## Display this help.
+	@awk 'BEGIN {FS = ":.*##"; printf "\nUsage:\n  make \033[36m<target>\033[0m\n"} /^[a-zA-Z_0-9-]+:.*?##/ { printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2 } /^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5) } ' $(MAKEFILE_LIST)
+
+## Demo
 
 .PHONY: build-openapi2jsonschema
 build-openapi2jsonschema: ## Build container image for openapi2jsonschema
@@ -53,4 +61,8 @@ build-openapi2jsonschema: ## Build container image for openapi2jsonschema
 
 .PHONY: openapi2jsonschema
 openapi2jsonschema: ## Convert OpenAPI to JSON Schema
-	docker run --rm -v $(pwd):/work openapi2jsonschema sample.yaml
+	docker run --rm -v $(PWD)/sample/schema:/work openapi2jsonschema https://raw.githubusercontent.com/argoproj/argo-cd/master/manifests/crds/application-crd.yaml
+
+.PHONY: validate-app
+validate-app:
+	kubeconform -schema-location default -schema-location 'sample/schema/{{ .ResourceKind }}_{{ .ResourceAPIVersion }}.json' ./sample/app.yaml
