@@ -17,8 +17,6 @@ jobs:
           aqua_version: v1.10.0
       - name: Lint
         run: make lint
-      - name: Conform
-        run: make conform
   tilt:
     name: Run tilt ci
     runs-on: ubuntu-20.04

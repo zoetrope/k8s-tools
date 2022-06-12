@@ -22,13 +22,13 @@ if debug_mode:
   '''
 
   build_cmd = 'CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -gcflags "-N -l" -o ./bin/hello main.go'
-  entrypoint=['/go/bin/dlv', '--listen=0.0.0.0:40000', "--accept-multiclient", '--api-version=2', '--headless=true', '--continue=true', 'exec', '/hello']
+  entrypoint=['/go/bin/dlv', '--listen=0.0.0.0:2345', "--accept-multiclient", '--api-version=2', '--headless=true', '--continue=true', 'exec', '/hello']
 
 
 local_resource('build-hello', build_cmd, deps=['./main.go'])
 
 docker_build_with_restart(
-  'hello',  # コンテナイメージ名
+  'hello:latest',  # コンテナイメージ名
   '.',      # docker build する際のパス
   entrypoint=entrypoint,
   dockerfile_contents=DOCKERFILE,
@@ -44,6 +44,6 @@ docker_build_with_restart(
 
 watch_file('./manifests')
 watch_settings(ignore=['./manifests/vendor']) # make previewするとvendorの変更が検知されてしまうのを無視。
-yaml = local('make preview')
+yaml = local('DEV=true make preview')
 k8s_yaml(yaml)
-k8s_resource('sample', port_forwards=[8000, 40000], resource_deps=['build-hello'])
+k8s_resource('sample', port_forwards=["8000:8000", "2345:2345"], resource_deps=['build-hello'])

@@ -9,3 +9,8 @@ name: kind-k8s-tools
 product: kind
 kubernetesVersion: v1.23.6
 registry: k8s-tools-registry
+kindV1Alpha4Cluster:
+  nodes:
+    - role: control-plane
+    - role: worker
+    - role: worker
