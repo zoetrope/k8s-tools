@@ -35,7 +35,7 @@ preview: ## Preview manifests
 
 .PHONY: lint
 lint: ## Lint go and manifests
-	$(make) preview | kubeconform
+	$(make) preview | kubeconform -strict
 	$(make) preview | kube-linter lint -
 	golangci-lint run
 
@@ -60,4 +60,4 @@ openapi2jsonschema: ## Convert OpenAPI to JSON Schema
 
 .PHONY: validate-app
 validate-app:
-	kubeconform -schema-location default -schema-location 'sample/schema/{{ .ResourceKind }}_{{ .ResourceAPIVersion }}.json' ./sample/app.yaml
+	kubeconform -strict -schema-location default -schema-location 'sample/schema/{{ .ResourceKind }}_{{ .ResourceAPIVersion }}.json' ./sample/app.yaml
