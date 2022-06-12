@@ -28,7 +28,7 @@ if debug_mode:
 local_resource('build-hello', build_cmd, deps=['./main.go'])
 
 docker_build_with_restart(
-  'hello:dev',  # コンテナイメージ名
+  'hello:latest',  # コンテナイメージ名
   '.',      # docker build する際のパス
   entrypoint=entrypoint,
   dockerfile_contents=DOCKERFILE,
@@ -44,6 +44,6 @@ docker_build_with_restart(
 
 watch_file('./manifests')
 watch_settings(ignore=['./manifests/vendor']) # make previewするとvendorの変更が検知されてしまうのを無視。
-yaml = local('make preview')
+yaml = local('DEV=true make preview')
 k8s_yaml(yaml)
 k8s_resource('sample', port_forwards=[8000, 40000], resource_deps=['build-hello'])

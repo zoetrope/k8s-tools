@@ -1,4 +1,4 @@
-SHELL=/bin/bash
+SHELL = /bin/bash
 make = make --no-print-directory
 
 .PHONY: all
@@ -27,10 +27,11 @@ format: ## Format jsonnet and libsonnet files
 		jsonnetfmt -i $$i; \
 	done
 
+DEV ?= false
 .PHONY: preview
 preview: ## Preview manifests
 	@cd manifests; jb install
-	@jsonnet -J ./manifests/vendor ./manifests/main.jsonnet | yq -P -
+	@jsonnet -J ./manifests/vendor --tla-code dev=$(DEV) ./manifests/main.jsonnet | yq -P -
 
 .PHONY: lint
 lint: ## Lint go and manifests
