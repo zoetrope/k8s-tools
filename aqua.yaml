@@ -17,7 +17,7 @@ packages:
   - name: mikefarah/yq@v4.25.2
   - name: stackrox/kube-linter@0.3.0
   - name: stern/stern@v1.21.0
-  - name: tilt-dev/ctlptl@v0.8.4
+  - name: tilt-dev/ctlptl@v0.8.5
   - name: tilt-dev/tilt@v0.30.4
   - name: yannh/kubeconform@v0.4.13
   - name: zegl/kube-score@v1.14.0
