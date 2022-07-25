@@ -19,5 +19,5 @@ packages:
   - name: stern/stern@v1.21.0
   - name: tilt-dev/ctlptl@v0.8.5
   - name: tilt-dev/tilt@v0.30.5
-  - name: yannh/kubeconform@v0.4.13
+  - name: yannh/kubeconform@v0.4.14
   - name: zegl/kube-score@v1.14.0
