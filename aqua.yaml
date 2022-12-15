@@ -16,7 +16,7 @@ packages:
   - name: kubernetes/kubectl@v1.25.4
   - name: mikefarah/yq@v4.30.5
   - name: stackrox/kube-linter@0.5.1
-  - name: stern/stern@v1.21.0
+  - name: stern/stern@v1.22.0
   - name: tilt-dev/ctlptl@v0.8.14
   - name: tilt-dev/tilt@v0.30.13
   - name: yannh/kubeconform@v0.4.14
