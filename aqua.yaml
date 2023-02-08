@@ -8,7 +8,7 @@ packages:
   - name: derailed/k9s@v0.27.2
   - name: golangci/golangci-lint@v1.51.1
   - name: google/go-jsonnet@v0.19.1
-  - name: helm/helm@v3.11.0
+  - name: helm/helm@v3.11.1
   - name: jsonnet-bundler/jsonnet-bundler@v0.5.1
   - name: kubernetes-sigs/kind@v0.17.0
   - name: kubernetes-sigs/krew@v0.4.3
