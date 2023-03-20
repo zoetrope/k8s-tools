@@ -14,7 +14,7 @@ packages:
   - name: kubernetes-sigs/krew@v0.4.3
   - name: kubernetes-sigs/kustomize@kustomize/v5.0.1
   - name: kubernetes/kubectl@v1.26.3
-  - name: mikefarah/yq@v4.32.1
+  - name: mikefarah/yq@v4.32.2
   - name: stackrox/kube-linter@v0.6.1
   - name: stern/stern@v1.24.0
   - name: tilt-dev/ctlptl@v0.8.17
