@@ -6,7 +6,7 @@ registries:
     ref: v4.12.0 # renovate: depName=aquaproj/aqua-registry
 packages:
   - name: derailed/k9s@v0.27.4
-  - name: golangci/golangci-lint@v1.52.2
+  - name: golangci/golangci-lint@v1.53.1
   - name: google/go-jsonnet@v0.20.0
   - name: helm/helm@v3.12.0
   - name: jsonnet-bundler/jsonnet-bundler@v0.5.1
