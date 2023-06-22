@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
-      - uses: aquaproj/aqua-installer@v2.1.1
+      - uses: aquaproj/aqua-installer@v2.1.2
         with:
           aqua_version: v2.9.0
       - name: Lint
@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
-      - uses: aquaproj/aqua-installer@v2.1.1
+      - uses: aquaproj/aqua-installer@v2.1.2
         with:
           aqua_version: v2.9.0
       - run: make start
