@@ -20,4 +20,4 @@ packages:
   - name: tilt-dev/ctlptl@v0.8.20
   - name: tilt-dev/tilt@v0.33.1
   - name: yannh/kubeconform@v0.6.2
-  - name: zegl/kube-score@v1.16.1
+  - name: zegl/kube-score@v1.17.0
