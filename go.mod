@@ -2,7 +2,7 @@ module github.com/zoetrope/k8s-tools
 
 go 1.19
 
-require github.com/go-delve/delve v1.21.1
+require github.com/go-delve/delve v1.21.2
 
 require (
 	github.com/cilium/ebpf v0.11.0 // indirect
