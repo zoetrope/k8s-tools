@@ -18,6 +18,6 @@ packages:
   - name: stackrox/kube-linter@v0.6.7
   - name: stern/stern@v1.28.0
   - name: tilt-dev/ctlptl@v0.8.27
-  - name: tilt-dev/tilt@v0.33.10
+  - name: tilt-dev/tilt@v0.33.11
   - name: yannh/kubeconform@v0.6.4
   - name: zegl/kube-score@v1.18.0
